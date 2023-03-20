@@ -1,0 +1,3 @@
+[submodule "ctrl/sysC_template"]
+	path = ctrl/sysC_template
+	url = git@github.com:pvip-nitin/sysC_template.git
