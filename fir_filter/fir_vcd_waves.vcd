@@ -1,0 +1,136 @@
+$date
+     Mar 21, 2023       11:52:18
+$end
+
+$version
+              SystemC 2.3.0_pub_rev_20111121-OSCI --- Mar 13 2023 10:49:51
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire    1  aaa  Reset       $end
+$var wire    1  aab  clk       $end
+$var wire    4  aac  inp [3:0]  $end
+$var wire    4  aad  outp [3:0]  $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+0aaa
+1aab
+b0 aac
+b0 aad
+$end
+
+#5000
+1aaa
+0aab
+b1111 aac
+
+#10000
+1aab
+
+#15000
+0aab
+b1110 aac
+
+#20000
+1aab
+
+#25000
+0aab
+b110 aac
+
+#30000
+1aab
+
+#35000
+0aab
+b1000 aac
+
+#40000
+1aab
+
+#45000
+0aaa
+0aab
+b1100 aac
+
+#50000
+1aab
+
+#55000
+0aab
+b1 aac
+
+#60000
+1aab
+
+#65000
+0aab
+b100 aac
+
+#70000
+1aab
+
+#75000
+1aaa
+0aab
+b1101 aac
+
+#80000
+1aab
+
+#85000
+0aab
+
+#90000
+1aab
+
+#95000
+0aab
+b101 aac
+
+#100000
+1aab
+
+#105000
+0aab
+b0 aac
+
+#110000
+1aab
+
+#115000
+0aab
+b1000 aac
+
+#120000
+1aab
+
+#125000
+0aab
+b1001 aac
+
+#130000
+1aab
+
+#135000
+0aab
+b10 aac
+
+#140000
+1aab
+
+#145000
+0aaa
+0aab
+b100 aac
+
