@@ -41,7 +41,7 @@ SC_MODULE(FullAdder) {
     }
 };
 
-// N-bit Adder module
+//N-bit Adder module
 SC_MODULE(NBitAdder) {
     sc_in<bool> clk, reset;
     sc_in<sc_lv<8>> a, b;
