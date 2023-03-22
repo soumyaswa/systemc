@@ -1,5 +1,5 @@
 $date
-     Mar 21, 2023       11:52:18
+     Mar 22, 2023       10:24:33
 $end
 
 $version
@@ -13,8 +13,8 @@ $end
 $scope module SystemC $end
 $var wire    1  aaa  Reset       $end
 $var wire    1  aab  clk       $end
-$var wire    4  aac  inp [3:0]  $end
-$var wire    4  aad  outp [3:0]  $end
+$var wire   16  aac  inp [15:0]  $end
+$var wire   16  aad  outp [15:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -32,105 +32,116 @@ $end
 #5000
 1aaa
 0aab
-b1111 aac
+b11 aac
 
 #10000
 1aab
 
 #15000
 0aab
-b1110 aac
+b101 aac
 
 #20000
 1aab
 
 #25000
 0aab
-b110 aac
+b0 aac
 
 #30000
 1aab
 
 #35000
+0aaa
 0aab
-b1000 aac
 
 #40000
 1aab
 
 #45000
-0aaa
-0aab
-b1100 aac
-
-#50000
-1aab
-
-#55000
 0aab
 b1 aac
 
+#50000
+1aab
+b100101001 aad
+
+#55000
+0aab
+b0 aac
+
 #60000
 1aab
+b0 aad
 
 #65000
+1aaa
 0aab
-b100 aac
+b1 aac
 
 #70000
 1aab
 
 #75000
-1aaa
+0aaa
 0aab
-b1101 aac
 
 #80000
 1aab
+b100101001 aad
 
 #85000
 0aab
+b110 aac
 
 #90000
 1aab
+b11011110110 aad
 
 #95000
+1aaa
 0aab
-b101 aac
+b10 aac
 
 #100000
 1aab
+b0 aad
 
 #105000
+0aaa
 0aab
-b0 aac
+b110 aac
 
 #110000
 1aab
+b11011110110 aad
 
 #115000
 0aab
-b1000 aac
+b0 aac
 
 #120000
 1aab
+b0 aad
 
 #125000
+1aaa
 0aab
-b1001 aac
+b10 aac
 
 #130000
 1aab
 
 #135000
+0aaa
 0aab
-b10 aac
+b101 aac
 
 #140000
 1aab
+b10111001101 aad
 
 #145000
-0aaa
 0aab
-b100 aac
+b0 aac
 

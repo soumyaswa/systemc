@@ -28,7 +28,7 @@ SC_MODULE(fir_test){
 		sc_trace(pTracefile, inp, "inp");
                 sc_trace(pTracefile, outp, "outp");
 
-		SC_THREAD(stimulus)
+		SC_THREAD(stimulus);
 
 	}
 
@@ -44,7 +44,7 @@ void fir_test::stimulus(){
 	srand(time(NULL));
 	while (true){
 		rst.write(rand() % 2);
-		inp.write(rand() % (1 << data_size));
+		inp.write(rand() % (1 << 3/*data_size*/));
 		cout << "Input is " << inp.read() << ", FIR filter output is " << outp.read() << endl;
 		wait(tp);
 	}

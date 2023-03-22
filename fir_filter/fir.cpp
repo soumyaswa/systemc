@@ -11,7 +11,7 @@ SC_MODULE(fir_filter){
 	void fir_filter_func(){
 
 		sc_uint<data_size> block[coef_size];
-		sc_uint<data_size> temp;
+		sc_uint<data_size> temp=0;
 		int i;
 
 		if(rst) outp.write(0);
@@ -19,12 +19,12 @@ SC_MODULE(fir_filter){
 			for(i = 0; i < 5; i++){
 				if(i == 0) block[i] = inp.read();
 				else block[i] = block[i-1];
-				cout << "block[" << i <<"] = " << block[i] << endl;
-				wait();
+				//cout << "block[" << i <<"] = " << block[i] << endl;
+				//wait();
 				
 				temp += coef[i] * block[i];
 				cout << "temp = " << temp << ", coef[" << i <<"] = " << coef[i] << ", block[" << i <<"] = " << block[i] << endl;
-				wait();
+				//wait();
 			}
 
 			outp.write(temp);
@@ -32,9 +32,8 @@ SC_MODULE(fir_filter){
 	}
 
 	SC_CTOR(fir_filter){
-		SC_CTHREAD(fir_filter_func, clk.pos());
-		//SC_METHOD(fir_filter_func);           ////////given wait() above , but we can't use those things inside method
+		SC_METHOD(fir_filter_func);           ////////given wait() above , but we can't use those things inside method
 		sensitive << clk.pos();
-		sensitive << rst.pos();
+		//sensitive << rst.pos();
 	}
 };
