@@ -8,6 +8,7 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_bv<1>> c_in;
     sc_signal<sc_bv<1>> sum[16];
     sc_signal<sc_bv<1>> c_out;
+    sc_signal<bool> clk, reset;
 
     // Initialize inputs
     //a.write(1010101010101010);
@@ -31,6 +32,9 @@ int sc_main(int argc, char* argv[]) {
     }
     fulladder.c_in(c_in);
     fulladder.c_out(c_out);
+    fulladder.clk(clk);
+    fulladder.reset(reset);
+
 
     // Simulate for 10 ns
     sc_start(10, SC_NS);

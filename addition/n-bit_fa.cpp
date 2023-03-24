@@ -8,6 +8,8 @@ SC_MODULE(FullAdder16) {
     sc_in<sc_bv<1>> c_in;
     sc_out<sc_bv<1>> sum[16];
     sc_out<sc_bv<1>> c_out;
+    
+    sc_in<bool> clk, reset;
 
     FA* fa[16];
     sc_signal<sc_bv<1>> c[16];
@@ -35,6 +37,8 @@ SC_MODULE(FullAdder16) {
 		    fa[i]->c_out(c[i+1]);
 		    //fa[i]->c_out(fa[i+1]->c_out);
 	    }
+	    fa[i]->clk(clk);
+	    fa[i]->reset(reset);
 
 
         }

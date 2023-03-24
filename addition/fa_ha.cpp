@@ -5,21 +5,40 @@ SC_MODULE(HA) {
 	sc_in<sc_bv<1>> b;
 	sc_out<sc_bv<1>> sum;
 	sc_out<sc_bv<1>> carry;
+	sc_in<bool> clk, reset;
+
 
 
 	void xor_gate() {
-		sum.write(a.read() ^ b.read());
+		if(!reset){
+			sum.write(a.read() ^ b.read());
+		}
+		else {
+			sum.write(0);
+		}
 	}
 
 	void and_gate(){
-		carry.write(a.read() & b.read());
+		if(!reset){
+			carry.write(a.read() & b.read());
+		}
+		else 
+		{
+			carry.write(0);
+		}
 	}
 
+
+	
 	SC_CTOR(HA) {
+		
+	
 		SC_METHOD(xor_gate);
+		sensitive << clk.pos();
 		sensitive << a << b;
 		
 		SC_METHOD(and_gate);
+		sensitive << clk.pos();
 		sensitive << a << b;
 	}
 };
@@ -32,6 +51,9 @@ SC_MODULE(FA) {
 	sc_in<sc_bv<1>> c_in;
 	sc_out<sc_bv<1>> sum;
 	sc_out<sc_bv<1>> c_out;
+
+	sc_in<bool> clk, reset;
+
 
 	sc_signal<sc_bv<1>> s1;
 	sc_signal<sc_bv<1>> c1;
@@ -48,11 +70,18 @@ SC_MODULE(FA) {
 		ha1->b(b);
 		ha1->sum(s1);
 		ha1->carry(c1);
+		ha1->clk(clk);
+		ha1->reset(reset);
+
+
 
 		ha2->a(s1);
 		ha2->b(c_in);
 		ha2->sum(sum);
 		ha2->carry(c2);
+		ha2->clk(clk);
+		ha2->reset(reset);
+
 
 		SC_METHOD(carry_out);
 		sensitive << c1 << c2;
@@ -64,9 +93,9 @@ SC_MODULE(FA) {
 	void carry_out() {
 		c_out.write(c1.read() | c2.read());
 	}
-	~FA() {
+	/*~FA() {
 		delete ha1;
 		delete ha2;
-	}
+	}*/
 	
 };
