@@ -1,0 +1,66 @@
+$date
+     Mar 24, 2023       18:47:39
+$end
+
+$version
+              SystemC 2.3.0_pub_rev_20111121-OSCI --- Mar 13 2023 10:49:51
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire    1  aaaaa  trace_a       $end
+$var wire    1  aaaab  trace_b       $end
+$var wire    1  aaaac  trace_diff       $end
+$var wire    1  aaaad  trace_borrow       $end
+$var wire    1  aae  clk       $end
+$var wire    1  aaf  reset       $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+0aaaaa
+0aaaab
+0aaaac
+0aaaad
+0aae
+0aaf
+$end
+
+#2000
+1aaaab
+1aaaac
+1aaaad
+
+#4000
+0aaaab
+0aaaac
+0aaaad
+
+#5000
+1aaaaa
+1aaaac
+
+#6000
+0aaaaa
+0aaaac
+
+#7000
+1aaaaa
+1aaaab
+
+#8000
+0aaaaa
+0aaaab
+
+#9000
+1aaaab
+1aaaac
+1aaaad
+
