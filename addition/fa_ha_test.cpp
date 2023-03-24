@@ -1,7 +1,6 @@
 #include <systemc.h>
 #include "fa_ha.cpp"
 
-
 SC_MODULE(Testbench) {
     sc_out<sc_bv<1>> a;
     sc_out<sc_bv<1>> b;
