@@ -1,7 +1,6 @@
-#include <systemc.h>
+#include "systemc.h"
 #include "n-bit_fa.cpp"
 
-#include "systemc.h"
 
 int sc_main(int argc, char* argv[]) {
     sc_signal<sc_bv<1>> a[16];
@@ -11,11 +10,17 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_bv<1>> c_out;
 
     // Initialize inputs
+    //a.write(1010101010101010);
+    //b[0] = 
+    srand(time(NULL));
+
     for (int i = 0; i < 16; i++) {
-        a[i] = i % 2;
-        b[i] = (i/2)% 2;
+	            //a[i] = i % 2;
+        //b[i] = (i/2)% 2;
+	a[i].write(rand() % 2);
+	b[i].write(rand() % 2);
     }
-    c_in = 0;
+    c_in = rand() % 2;
 
     // Instantiate FullAdder16 module
     FullAdder16 fulladder("fulladder");
