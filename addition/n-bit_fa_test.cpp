@@ -3,10 +3,10 @@
 
 
 int sc_main(int argc, char* argv[]) {
-    sc_signal<sc_bv<1>> a[16];
-    sc_signal<sc_bv<1>> b[16];
+    sc_signal<sc_bv<1>> a[N];
+    sc_signal<sc_bv<1>> b[N];
     sc_signal<sc_bv<1>> c_in;
-    sc_signal<sc_bv<1>> sum[16];
+    sc_signal<sc_bv<1>> sum[N];
     sc_signal<sc_bv<1>> c_out;
     sc_signal<bool> clk, reset;
 
@@ -15,7 +15,7 @@ int sc_main(int argc, char* argv[]) {
     //b[0] = 
     srand(time(NULL));
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < N; i++) {
 	            //a[i] = i % 2;
         //b[i] = (i/2)% 2;
 	a[i].write(rand() % 2);
@@ -25,7 +25,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Instantiate FullAdder16 module
     FullAdder16 fulladder("fulladder");
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < N; i++) {
         fulladder.a[i](a[i]);
         fulladder.b[i](b[i]);
         fulladder.sum[i](sum[i]);
@@ -45,16 +45,16 @@ int sc_main(int argc, char* argv[]) {
 
     // Print out results
     std::cout << "Inputs: a = ";
-    for (int i = 15; i >= 0; i--) {
+    for (int i = N-1; i >= 0; i--) {
         std::cout << a[i];
     }
     std::cout << ", b = ";
-    for (int i = 15; i >= 0; i--) {
+    for (int i = N-1; i >= 0; i--) {
         std::cout << b[i];
     }
     std::cout << ", c_in = " << c_in << std::endl;
     std::cout << "Outputs: sum = ";
-    for (int i = 15; i >= 0; i--) {
+    for (int i = N-1; i >= 0; i--) {
         std::cout << sum[i];
     }
     std::cout << ", c_out = " << c_out << std::endl;
