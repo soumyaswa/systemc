@@ -16,10 +16,8 @@ int sc_main(int argc, char* argv[]) {
     srand(time(NULL));
 
     for (int i = 0; i < N; i++) {
-	            //a[i] = i % 2;
-        //b[i] = (i/2)% 2;
-	a[i].write(rand() % 2);
-	b[i].write(rand() % 2);
+	    a[i].write(rand() % 2);
+	    b[i].write(rand() % 2);
     }
     c_in = rand() % 2;
 
@@ -44,20 +42,20 @@ int sc_main(int argc, char* argv[]) {
     //sc_start(10, SC_NS);
 
     // Print out results
-    std::cout << "Inputs: a = ";
+    cout << "Inputs: a = ";
     for (int i = N-1; i >= 0; i--) {
-        std::cout << a[i];
+        cout << a[i];
     }
-    std::cout << ", b = ";
+    cout << ", b = ";
     for (int i = N-1; i >= 0; i--) {
-        std::cout << b[i];
+        cout << b[i];
     }
-    std::cout << ", c_in = " << c_in << std::endl;
-    std::cout << "Outputs: sum = ";
+    cout << ", c_in = " << c_in << std::endl;
+    cout << "Outputs: sum = ";
     for (int i = N-1; i >= 0; i--) {
-        std::cout << sum[i];
+        cout << sum[i];
     }
-    std::cout << ", c_out = " << c_out << std::endl;
+    cout << ", c_out = " << c_out << std::endl;
 
     return 0;
 }
