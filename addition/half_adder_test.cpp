@@ -2,8 +2,8 @@
 #include "half_adder.cpp"
 
 SC_MODULE(testbench) {
-	sc_signal<sc_bv<1>>  a,b;
-	sc_signal<sc_bv<1>> sum,carry;
+	sc_signal<bool>  a,b;
+	sc_signal<bool> sum,carry;
 
 	sc_trace_file *pTracefile;
 
