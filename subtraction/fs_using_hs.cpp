@@ -8,8 +8,22 @@ SC_MODULE(HS) {
 	sc_in<bool> clk, reset;
 
 
+	void half_sun() {
+		if(!reset){
+			diff.write(a.read() ^ b.read());
+			borrow.write((~a.read() & b.read()));
+		}
+		else {
+			diff.write(0);
+			borrow.write(0);
+		}
+	}
 
-	void xor_gate() {
+
+
+         /////////WHILE DOING LIKE THIS THE OUTPUT IS COMMING WRONG 
+
+	/*void xor_gate() {
 		if(!reset){
 			diff.write(a.read() ^ b.read());
 		}
@@ -26,76 +40,66 @@ SC_MODULE(HS) {
 		{
 			borrow.write(0);
 		}
-	}
+	}*/
 
 
 	
 	SC_CTOR(HS) {
+
+		SC_METHOD(half_sun);
+		sensitive << clk.pos();
+		sensitive << a << b;
 		
 	
-		SC_METHOD(xor_gate);
-	//	sensitive << clk.pos();
+	/*	SC_METHOD(xor_gate);
+		sensitive << clk.pos();
 		sensitive << a << b;
 		
 		SC_METHOD(and_gate);
 	//	sensitive << clk.pos();
-		sensitive << a << b;
+		sensitive << a << b;*/
 	}
 };
 
 
 // Full Adder module
-/*SC_MODULE(FA) {
-	sc_in<sc_bv<1>> a;
-	sc_in<sc_bv<1>> b;
-	sc_in<sc_bv<1>> c_in;
-	sc_out<sc_bv<1>> sum;
-	sc_out<sc_bv<1>> c_out;
+SC_MODULE(FS) {
+    sc_in<sc_bv<1>> a, b, b_in;
+    sc_out<sc_bv<1>> b_out;
+    sc_out<sc_bv<1>> diff;
+    sc_in<bool> clk, reset;
+    
 
-	sc_in<bool> clk, reset;
+    sc_signal<sc_bv<1>> d1;
+    sc_signal<sc_bv<1>> bo0, bo1;
 
+    HS* hs1;
+    HS* hs2;
 
-	sc_signal<sc_bv<1>> s1;
-	sc_signal<sc_bv<1>> c1;
-	sc_signal<sc_bv<1>> c2;
+    void borrow_out() {	    
+	b_out.write(bo1.read() | bo0.read());
+    }
 
-	HA* ha1;
-	HA* ha2;
+    SC_CTOR(FS){
 
-	SC_CTOR(FA) {
-		ha1 = new HA("ha1");
-		ha2 = new HA("ha2");
-
-		ha1->a(a);
-		ha1->b(b);
-		ha1->sum(s1);
-		ha1->carry(c1);
-		ha1->clk(clk);
-		ha1->reset(reset);
-
-
-
-		ha2->a(s1);
-		ha2->b(c_in);
-		ha2->sum(sum);
-		ha2->carry(c2);
-		ha2->clk(clk);
-		ha2->reset(reset);
-
-
-		SC_METHOD(carry_out);
-		sensitive << c1 << c2;
-
-		//delete ha1;
-		//delete ha2;
-	}
-
-	void carry_out() {
-		c_out.write(c1.read() | c2.read());
-	}*/
-	/*~FA() {
-		delete ha1;
-		delete ha2;
-	}*/
+	    hs1 = new HS("hs1");
+            hs2 = new HS("hs2");
 	
-//};
+	    hs1->a(a);
+            hs1->b(b);
+            hs1->diff(d1);
+            hs1->borrow(bo0);
+	    hs1->clk(clk);
+	    hs1->reset(reset);
+
+            hs2->a(d1);
+            hs2->b(b_in);
+            hs2->diff(diff);
+            hs2->borrow(bo1);
+	    hs2->clk(clk);
+	    hs2->reset(reset);
+	
+            SC_METHOD(borrow_out);
+            sensitive << bo0 << bo1;
+    }
+};
