@@ -11,6 +11,7 @@ SC_MODULE(FA_TEST){
 
     // Instantiate the N-bit adder
     //sc_trace_file *pTracefile;
+    sc_trace_file *tf;
 
     FullAdder16* adder;
 
@@ -55,11 +56,8 @@ SC_MODULE(FA_TEST){
     }
 
     ~FA_TEST(){
-	    //sc_close_vcd_trace_file(pTracefile);
-	    /*for(i = 0; i<N; i++){
-			delete FA[i];
-		}*/
-	    //delete adder;
+	    sc_close_vcd_trace_file(tf);
+	    delete adder;
 	    
     }
 };
@@ -102,6 +100,34 @@ void FA_TEST::stimulus(){
 		cout << " c_out = " << c_out.read() << endl;
 	
 		cout << "end " << endl;
+                wait(0.01, SC_NS);   //added this because of in the wave form i am geting started from the 00 which is not needed but when reset is 1 is taking some extra datas
+
+
+		// Combine signals for tracing
+		sc_bv<N> a_combined, b_combined, sum_combined;
+		// Update combined signals
+		
+		for (int i = 0; i < N; i++) {
+                a_combined[i] = a[i].read().get_bit(0);
+                b_combined[i] = b[i].read().get_bit(0);
+                sum_combined[i] = sum[i].read().get_bit(0);
+		
+		}
+
+		tf = sc_create_vcd_trace_file("waveform");
+
+		// Add signals to trace
+		sc_trace(tf, clk, "clk");
+	       	sc_trace(tf, reset, "reset");
+		sc_trace(tf, c_in, "c_in");
+	       	sc_trace(tf, c_out, "c_out");
+		
+		// Trace combined signals
+		sc_trace(tf, a_combined, "a_combined");
+	       	sc_trace(tf, b_combined, "b_combined");
+	       	sc_trace(tf, sum_combined, "sum_combined");
+
+
 		wait(10, SC_NS);
 	}
 }
