@@ -28,16 +28,16 @@ SC_MODULE(multiplier_N) {
 		
 	        for(j = 0; j < N; j++){
 			if(j==0) {
-				temp_mul_op[j] = 0;  /// for the first bit only temp_mul_op 0, so that one of the input for adder is 0
+				temp_mul_op[j] = 0; 
 			}
 
-			if(temp_multiplier[j] == 1){            ///  checking for multiplier bit if it is high 
-				s0[j] = j;            ///  if high than storing the index of that bit in local varible which will be later used for shift_by in left shift 
-				v1[j] = 1;            ///  taking this inorder to make the output of left shift valid only when index of multiplier bit is high. NOTE: valid is active high in left shift module hence making it high here.
+			if(temp_multiplier[j] == 1){             
+				s0[j] = j;           
+				v1[j] = 1;            		
 			}
 			else {
-				s0[j] = 0;            /////  or else make the shift_by 0
-				v1[j] = 0;            /////  or else make the valid 0
+				s0[j] = 0;            
+				v1[j] = 0;           
 			}
 			temp_shift[j].write(s0[j]);
 			temp_valid[j].write(v1[j]);
@@ -55,18 +55,18 @@ SC_MODULE(multiplier_N) {
 		sensitive << clk.pos();
 		sensitive << multiplicand << multiplier;
 		
-		left_shift_N* ls_N[N];                           ///   connecting left shift module 
+		left_shift_N* ls_N[N];                            
 		for(i = 0; i<N; i++){
 			ls_N[i] = new left_shift_N(sc_gen_unique_name("LS"));
 			ls_N[i]->clk(clk);
 			ls_N[i]->rst(rst);
 			ls_N[i]->inp(multiplicand);
-			ls_N[i]->valid(temp_valid[i]);               ///   required because we want only the output of left shift for which multiplier input bit is high  
+			ls_N[i]->valid(temp_valid[i]);               ///   required , we want only the output of left shift for which multiplier input bit is high  
 			ls_N[i]->shift_by(temp_shift[i]);            ///   shift by index number of multiplier bit which is high 
-			ls_N[i]->out(ls_out[i]);		 ///   getting the output of left shift and storing in a signal of vector so that i can add all and get final mul_op.
-		}
+			ls_N[i]->out(ls_out[i]);		 ///   getting the output of left shift and storing in a signal of vector 
+			}
 
-		half_adder* ha[N];                               ///   connecting adder module so that i can add all outputs of left shift for which the index of multiplier bit is high, and get the final mul_op.
+		half_adder* ha[N];                               ///   connecting adder module 
 		for(k = 0; k<N; k++){
 			ha[k] = new half_adder(sc_gen_unique_name("HA"));
 			ha[k]->clk(clk);
