@@ -7,17 +7,17 @@
 
 
 SC_MODULE(multiplier_N) {                            
-	sc_in<sc_uint<N>> multiplicand;
-	sc_in<sc_uint<N>> multiplier;
-	sc_out<sc_uint<3*N>> mul_op;
+	sc_in<sc_biguint<N>> multiplicand;
+	sc_in<sc_biguint<N>> multiplier;
+	sc_out<sc_biguint<3*N>> mul_op;
 	sc_in<bool> clk, rst;
 
 	int i, j, k;
 	
-	sc_signal<sc_uint<2*N>> ls_out[N];
-	sc_signal<sc_uint<3*N>> temp_mul_op[N];
-	sc_signal<sc_uint<N>> temp_shift[N];
-	sc_signal<sc_uint<N>> temp_valid[N];
+	sc_signal<sc_biguint<2*N>> ls_out[N];
+	sc_signal<sc_biguint<3*N>> temp_mul_op[N];
+	sc_signal<sc_biguint<N>> temp_shift[N];
+	sc_signal<sc_biguint<N>> temp_valid[N];
 
 
 	void multiplier_func(){
@@ -79,5 +79,16 @@ SC_MODULE(multiplier_N) {
 		}
 	}
 };
+
+
+
+
+////------------------------------------NOTE------------------------------------------------
+//ERROR:
+//Error: (E5) out of bounds: sc_uint[_base] initialization: length = 96 violates 1 <= length <= 64
+//
+//WHEN I AM USING "sc_uint" ITS GIVING ME OUTOF MEMORY(BOUNDRY) ISSUE AS: FAULT BECAUSE IT ONLY SUPPORTS UPTO 64 BITS AND I AM GIVING 32 AS INPUT AND IT WILL GOES UPTO 94 .
+//
+//NOW I HAVE CHANGE THE "sc_uint" to "sc_biguint" where it will support upto 64 ,128......that's why now i am geting the output
 
 

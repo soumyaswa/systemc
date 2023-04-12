@@ -4,21 +4,22 @@
 
 //------------------- ADDER MODULE --------------------------------
 SC_MODULE(half_adder){
-	sc_in<sc_uint<3*N>> a;
-	sc_in<sc_uint<2*N>> b;
-        sc_out<sc_uint<3*N>> sum;
+	sc_in<sc_biguint<3*N>> a;
+	sc_in<sc_biguint<2*N>> b;
+        sc_out<sc_biguint<3*N>> sum;
 	sc_in<bool> rst, clk;
 
 	void h_adder(){
-		sc_uint<3*N> a0 = a.read();    
-		sc_uint<3*N> b0 = b.read();
-		sc_uint<3*N> s0;		        
+		sc_biguint<3*N> a0 = a.read();    
+		sc_biguint<3*N> b0 = b.read();
+		sc_biguint<3*N> s0;		        
               
 		if(rst){
 			s0 = 0;
 		}
 		else {
-			s0 = a0 + b0;    		}
+			s0 = a0 + b0;    		
+		}
 		sum.write(s0);
 	}
 

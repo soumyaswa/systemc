@@ -3,12 +3,12 @@
 
 
 SC_MODULE(left_shift_N_tb) {
-    sc_signal<sc_bv<N>> inp;
-    sc_signal<sc_bv<N>> shift_by;
+    sc_signal<sc_biguint<N>> inp;
+    sc_signal<sc_biguint<4>> shift_by;
     sc_clock clk;
     sc_signal<bool> rst;
-    sc_signal<bool> valid;
-    sc_signal<sc_bv<N+N>> out;
+    sc_signal<sc_biguint<N>> valid;
+    sc_signal<sc_biguint<N+N>> out;
     
     // Module instance
     left_shift_N dut;
@@ -18,17 +18,17 @@ SC_MODULE(left_shift_N_tb) {
 
     // Testbench process
     void tb_process() {
-	    srand(time(NULL));
+	    //srand(time(NULL));
         while(true){
         // Randomly generate input values
-        inp.write(rand() % (1 << N));
+        /*inp.write(rand() % (1 << N));
         shift_by.write(rand() % (N+1));
-        valid.write(rand() % 2);
+        valid.write(rand() % 2);*/
          
 
-	/*inp.write(rand());
-        shift_by.write(rand() );
-        valid.write(rand() % 2);*/      ///while doing for 32 bit getting segementation fault
+	inp.write(rand() /*4294967295*/);
+        shift_by.write(rand() /*14*/);
+        valid.write(rand() % 2);      ///while doing for 32 bit getting segementation fault
 
 
         // Wait for a few clock cycles
@@ -45,7 +45,7 @@ SC_MODULE(left_shift_N_tb) {
 	
 
         // Print the input and output values
-        cout << "inp = " <<  hex << inp.read() << ", shift_by = " << shift_by.read() << ", valid = " << valid.read() << endl;
+        cout << "inp = "  << inp.read() << ", shift_by = " << shift_by.read() << ", valid = " << valid.read() << endl;
         cout << "out = " << out.read() << endl;
 	wait(10,SC_NS);
 	}
