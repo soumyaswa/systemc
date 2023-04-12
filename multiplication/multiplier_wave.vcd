@@ -1,0 +1,122 @@
+$date
+     Apr 12, 2023       14:49:29
+$end
+
+$version
+              SystemC 2.3.0_pub_rev_20111121-OSCI --- Mar 13 2023 10:49:51
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire   16  aaa  multiplicand [15:0]  $end
+$var wire   16  aab  multiplier [15:0]  $end
+$var wire   48  aac  mul_opput [47:0]  $end
+$var wire    1  aad  clk       $end
+$var wire    1  aae  rst       $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+b1011101001000 aaa
+b1000011100111011 aab
+b1100010011000101010110011000 aac
+1aad
+0aae
+$end
+
+#5000
+0aad
+
+#10000
+b100000001000101 aaa
+b1001111100011000 aab
+b0 aac
+1aad
+1aae
+
+#15000
+0aad
+
+#20000
+b1111010100010 aaa
+b100111010101101 aab
+b1001011010100000111101111010 aac
+1aad
+0aae
+
+#25000
+0aad
+
+#30000
+b1000110100011101 aaa
+b10111111110001 aab
+b0 aac
+1aad
+1aae
+
+#35000
+0aad
+
+#40000
+b10110110011101 aaa
+b10111011000101 aab
+b1000010101010100111111010001 aac
+1aad
+0aae
+
+#45000
+0aad
+
+#50000
+b100011101000110 aaa
+b1000001110111011 aab
+b100100101011001110001000100010 aac
+1aad
+
+#55000
+0aad
+
+#60000
+b111011100111 aaa
+b1001001100100 aab
+b1000100100001000000111100 aac
+1aad
+
+#65000
+0aad
+
+#70000
+b1010110001111011 aaa
+b1110100100101100 aab
+b10011101000110011001100000100100 aac
+1aad
+
+#75000
+0aad
+
+#80000
+b1010101100000110 aaa
+b1011110011001101 aab
+b1111110001000010101101111001110 aac
+1aad
+
+#85000
+0aad
+
+#90000
+b1111111110101011 aaa
+b1111110111111011 aab
+b0 aac
+1aad
+1aae
+
+#95000
+0aad
+
