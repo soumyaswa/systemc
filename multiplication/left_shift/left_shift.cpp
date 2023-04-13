@@ -6,7 +6,7 @@
 
 SC_MODULE(left_shift_N) {
     sc_in<sc_biguint<N>> inp;
-    sc_in<sc_biguint<4>> shift_by;
+    sc_in<sc_biguint<S>> shift_by;
     sc_out<sc_biguint<2*N>> out;
     sc_in<bool> clk, rst;
     sc_in<sc_biguint<N>> valid;
@@ -102,8 +102,8 @@ SC_MODULE(left_shift_N) {
 
 
 ///----------------NOTE------------------------------------
-//ERROR:Error: (E5) out of bounds: sc_int[_base] bit selection: index = 846930917 violates 0 <= index <= 63
-//geting this error here so conver the sc_in<sc_biguint<N>> shift_by; to sc_in<sc_biguint<4>> shift_by; for geting a output correctly
+//ERROR:Error: (E5) out of bounds: sc_int[_base] bit selection: index = 8S6930917 violates 0 <= index <= 63
+//geting this error here so conver the sc_in<sc_biguint<N>> shift_by; to sc_in<sc_biguint<S>> shift_by; for geting a output correctly
 //need to make logic for this also
 
 

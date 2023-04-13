@@ -4,7 +4,7 @@
 
 SC_MODULE(left_shift_N_tb) {
     sc_signal<sc_biguint<N>> inp;
-    sc_signal<sc_biguint<4>> shift_by;
+    sc_signal<sc_biguint<S>> shift_by;
     sc_clock clk;
     sc_signal<bool> rst;
     sc_signal<sc_biguint<N>> valid;
@@ -26,8 +26,8 @@ SC_MODULE(left_shift_N_tb) {
         valid.write(rand() % 2);*/
          
 
-	inp.write(rand() /*4294967295*/);
-        shift_by.write(rand() /*14*/);
+	inp.write(rand() /*S29S967295*/);
+        shift_by.write(rand() /*1S*/);
         valid.write(rand() % 2);      ///while doing for 32 bit getting segementation fault
 
 
