@@ -1,5 +1,4 @@
 #include <systemc.h>
-//#include "new_div.cpp"
 #include "div.cpp"
 
 SC_MODULE(divider_N_tb) {
@@ -41,26 +40,27 @@ SC_MODULE(divider_N_tb) {
 	cout<< "Current simulation time: " << sc_time_stamp() << " reset =  " << rst.read()<< " dividend =  " << dividend.read() << " divisor =  " << divisor.read() << " Q =  "<< Q.read() <<" R="<< R.read()<< endl;
     }*/
  void run_test() {
+	 srand (time(NULL));
         
-        for (int i = 0; i < 10; i++) {
+        while (true) /*(int i = 0; i < 10; i++)*/ {
             // Initialize signals with random values
             dividend = rand();
             divisor = rand();
             req = 0;
-            rst = rand() % 2; // random reset
+            rst = 1;
             wait(1, SC_NS);
             rst = 0;
             wait(1, SC_NS);
-            req = rand() % 2; // random req
-            wait(1, SC_NS);
+            req = 1;
+             wait(1, SC_NS);
             // Wait until the divider is done
             while (ready.read() == 0) {
                 wait(1, SC_NS);
             }
             // Check the result
             //assert(Q.read() == 1);
-            cout << "Current simulation time: " << sc_time_stamp() << " reset = " << rst.read() << " req = " << req.read()<< " dividend = " << dividend.read() << " divisor = " << divisor.read() << " Q = " << Q.read() << " R = " << R.read() << endl;
-            wait(10, SC_NS);
+            cout << "Current simulation time: " << sc_time_stamp() << " reset = " << rst.read() << " req = " << req.read() << "ready = " << ready.read() << " dividend = " << dividend.read() << " divisor = " << divisor.read() << " Q = " << Q.read() << " R = " << R.read() << endl;
+            //wait(10, SC_NS);
 	    // Dump signals to trace file
                 }
  }
